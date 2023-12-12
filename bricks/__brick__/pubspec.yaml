@@ -24,6 +24,8 @@ dependencies:
   flutter_svg: ^1.1.5
   responsive_builder: ^0.7.0  
   calendar_date_picker2: ^0.5.3
+  shared_preferences: ^2.2.2
+
 
 dev_dependencies:
   flutter_test:

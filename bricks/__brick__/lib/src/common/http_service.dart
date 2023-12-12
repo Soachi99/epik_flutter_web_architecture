@@ -116,7 +116,7 @@ class HttpService {
                 "Parece que no tienes internet. Revisa tu conexión e inténtalo de nuevo.");
     }
 
-    if (response.success == false) {
+    if (success == false) {
       return HttpServiceResponse(
           success: false, errorCode: response.statusCode, message: message);
     }
