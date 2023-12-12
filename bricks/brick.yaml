@@ -1,0 +1,13 @@
+name: epik_flutter_web_architecture
+description: Brick to build a new epik web project
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.38 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Project name
+    default: Dash
+    prompt: What is your project name?
