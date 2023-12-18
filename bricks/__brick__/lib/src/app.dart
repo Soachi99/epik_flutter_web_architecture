@@ -16,54 +16,23 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    var deviceType = getDeviceType(size);
-
-    return Consumer(
-      builder: (context, ref, child) {
-        final goRouter = ref.watch(goRouterProvider);
-        return ResponsiveApp(
-          builder: (context) =>
-              OrientationBuilder(builder: (context, orientation) {
-            return ScreenUtilInit(
-              designSize: getDesignSizeByScreen(deviceType, orientation, size),
-              rebuildFactor: RebuildFactors.always,
-              child: MaterialApp.router(
-                debugShowCheckedModeBanner: false,
-                title: '{{name.snakeCase()}}',
-                routerConfig: goRouter,
-                localizationsDelegates: const [
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: S.delegate.supportedLocales,
-              ),
-            );
-          }),
-        );
-      },
+    return ResponsiveApp(
+      builder: (context) => Sizer(
+        builder: (context, orientation, deviceType) => MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: '{{name.snakeCase()}}',
+          themeMode: ThemeMode.light,
+          theme: t.Theme().theme,
+          routeInformationParser: router.routeInformationParser,
+          routerDelegate: router.routerDelegate,
+          routeInformationProvider: router.routeInformationProvider,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('es')],
+        ),
+      ),
     );
-  }
-}
-
-Size getDesignSizeByScreen(
-    DeviceScreenType deviceType, Orientation orientation, Size size) {
-  switch (deviceType) {
-    case DeviceScreenType.mobile:
-      return const Size(375, 812);
-    case DeviceScreenType.tablet:
-      return orientation == Orientation.portrait
-          ? Size(size.height, size.width)
-          : const Size(1024, 1280);
-    case DeviceScreenType.desktop:
-      return orientation == Orientation.landscape
-          ? Size(size.width, size.height)
-          : Size(size.height, size.width);
-    default:
-      return orientation == Orientation.landscape
-          ? Size(size.width, size.height)
-          : Size(size.height, size.width);
   }
 }

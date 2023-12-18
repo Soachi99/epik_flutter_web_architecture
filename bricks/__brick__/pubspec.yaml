@@ -25,7 +25,8 @@ dependencies:
   responsive_builder: ^0.7.0  
   calendar_date_picker2: ^0.5.3
   shared_preferences: ^2.2.2
-  flutter_screenutil: ^5.9.0
+  sizer: ^2.0.15
+  
 
 
 dev_dependencies:
